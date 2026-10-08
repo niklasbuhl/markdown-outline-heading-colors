@@ -1,0 +1,125 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: var(--vscode-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+}
+
+#tree {
+  padding: 2px 0 8px;
+  outline: none;
+  user-select: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+  padding-right: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+.row:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.row.active {
+  background: var(--vscode-list-inactiveSelectionBackground);
+}
+
+#tree:focus .row.focused {
+  border-color: var(--vscode-list-focusOutline, var(--vscode-focusBorder));
+}
+
+#tree:focus .row.focused.active {
+  background: var(--vscode-list-activeSelectionBackground);
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.35;
+  padding: 1px 0;
+}
+
+.twistie {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+  position: relative;
+}
+
+.twistie.open::before,
+.twistie.closed::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid var(--vscode-icon-foreground, var(--vscode-foreground));
+  border-bottom: 1.5px solid var(--vscode-icon-foreground, var(--vscode-foreground));
+  transform: rotate(-45deg);
+  opacity: 0.8;
+}
+
+.twistie.open::before {
+  top: 4px;
+  transform: rotate(45deg);
+}
+
+#empty {
+  padding: 8px 20px;
+  color: var(--vscode-descriptionForeground);
+}
+
+#levelbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  gap: 2px;
+  padding: 4px 8px 4px 20px;
+  background: var(--vscode-sideBar-background);
+  border-bottom: 1px solid var(--vscode-sideBarSectionHeader-border, transparent);
+}
+
+#levelbar[hidden] {
+  display: none;
+}
+
+#levelbar button {
+  font: inherit;
+  font-size: 11px;
+  line-height: 16px;
+  padding: 1px 7px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--vscode-descriptionForeground);
+  cursor: pointer;
+}
+
+#levelbar button:hover {
+  background: var(--vscode-toolbar-hoverBackground);
+  color: var(--vscode-foreground);
+}
+
+#levelbar button.on {
+  border-color: var(--vscode-focusBorder);
+  color: var(--vscode-foreground);
+}
+
+#levelbar button:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+}

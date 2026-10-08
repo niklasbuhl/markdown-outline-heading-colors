@@ -1,0 +1,320 @@
+{
+  "name": "markdown-outline-heading-colors",
+  "displayName": "Markdown Outline Heading Colors",
+  "description": "A Markdown headings outline with per-level color, size and weight.",
+  "version": "0.7.0",
+  "publisher": "niklasbuhl",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "outline",
+    "headings",
+    "toc"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "markdownOutlineHeadingColors.headings",
+          "name": "Headings",
+          "icon": "$(list-tree)",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "markdownOutlineHeadingColors.followCursorOff",
+        "title": "Stop Following Cursor",
+        "icon": "$(target)",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.followCursorOn",
+        "title": "Follow Cursor",
+        "icon": "$(circle-large-outline)",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.toggleFollowCursor",
+        "title": "Toggle Follow Cursor",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.expandAll",
+        "title": "Expand All",
+        "icon": "$(expand-all)",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.collapseAll",
+        "title": "Collapse All",
+        "icon": "$(collapse-all)",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.foldTo1",
+        "title": "Fold to #",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.foldTo2",
+        "title": "Fold to ##",
+        "category": "Markdown Headings"
+      },
+      {
+        "command": "markdownOutlineHeadingColors.foldTo3",
+        "title": "Fold to ###",
+        "category": "Markdown Headings"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "markdownOutlineHeadingColors.followCursorOff",
+          "when": "view == markdownOutlineHeadingColors.headings && markdownOutlineHeadingColors.followCursor",
+          "group": "navigation@1"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.followCursorOn",
+          "when": "view == markdownOutlineHeadingColors.headings && !markdownOutlineHeadingColors.followCursor",
+          "group": "navigation@1"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.expandAll",
+          "when": "view == markdownOutlineHeadingColors.headings",
+          "group": "navigation@2"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.collapseAll",
+          "when": "view == markdownOutlineHeadingColors.headings",
+          "group": "navigation@3"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.foldTo2",
+          "when": "view == markdownOutlineHeadingColors.headings",
+          "group": "1_fold@1"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.foldTo3",
+          "when": "view == markdownOutlineHeadingColors.headings",
+          "group": "1_fold@2"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.refresh",
+          "when": "view == markdownOutlineHeadingColors.headings",
+          "group": "2_more@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "markdownOutlineHeadingColors.refresh",
+          "when": "markdownOutlineHeadingColors.hasDocument"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.expandAll",
+          "when": "markdownOutlineHeadingColors.hasDocument"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.collapseAll",
+          "when": "markdownOutlineHeadingColors.hasDocument"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.foldTo1",
+          "when": "markdownOutlineHeadingColors.hasDocument"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.foldTo2",
+          "when": "markdownOutlineHeadingColors.hasDocument"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.foldTo3",
+          "when": "markdownOutlineHeadingColors.hasDocument"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.followCursorOn",
+          "when": "!markdownOutlineHeadingColors.followCursor"
+        },
+        {
+          "command": "markdownOutlineHeadingColors.followCursorOff",
+          "when": "markdownOutlineHeadingColors.followCursor"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Markdown Outline Heading Colors",
+      "properties": {
+        "markdownOutlineHeadingColors.fontSizes": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 6,
+            "maximum": 48
+          },
+          "minItems": 6,
+          "maxItems": 6,
+          "default": [
+            17,
+            15,
+            13,
+            13,
+            12,
+            12
+          ],
+          "markdownDescription": "Font size in px for `#` to `######`, in order."
+        },
+        "markdownOutlineHeadingColors.fontWeights": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 100,
+            "maximum": 900
+          },
+          "minItems": 6,
+          "maxItems": 6,
+          "default": [
+            700,
+            700,
+            400,
+            400,
+            400,
+            400
+          ],
+          "markdownDescription": "Font weight for `#` to `######` (400 = normal, 700 = bold)."
+        },
+        "markdownOutlineHeadingColors.fontFamily": {
+          "type": "string",
+          "enum": [
+            "ui",
+            "editor"
+          ],
+          "default": "ui",
+          "enumDescriptions": [
+            "The workbench UI font, like the built-in Outline.",
+            "The editor font (`editor.fontFamily`), like your headings in the editor."
+          ],
+          "description": "Font used for headings."
+        },
+        "markdownOutlineHeadingColors.indent": {
+          "type": "number",
+          "default": 12,
+          "minimum": 0,
+          "maximum": 40,
+          "description": "Indent per level in px."
+        },
+        "markdownOutlineHeadingColors.showLevelBar": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show the `# ## ### All` fold bar at the top of the view."
+        },
+        "markdownOutlineHeadingColors.showHashes": {
+          "type": "boolean",
+          "default": false,
+          "description": "Prefix each heading with its # marks."
+        },
+        "markdownOutlineHeadingColors.hideTags": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hide #tags (Foam style) in heading labels."
+        },
+        "markdownOutlineHeadingColors.followCursor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Highlight the heading that contains the cursor, and expand the view to show it."
+        },
+        "markdownOutlineHeadingColors.maxLevel": {
+          "type": "integer",
+          "default": 6,
+          "minimum": 1,
+          "maximum": 6,
+          "description": "Deepest heading level to show."
+        }
+      }
+    },
+    "colors": [
+      {
+        "id": "markdownOutlineHeadingColors.h1",
+        "description": "Label color for # headings in the Headings view.",
+        "defaults": {
+          "light": "editor.foreground",
+          "dark": "editor.foreground",
+          "highContrast": "editor.foreground",
+          "highContrastLight": "editor.foreground"
+        }
+      },
+      {
+        "id": "markdownOutlineHeadingColors.h2",
+        "description": "Label color for ## headings in the Headings view.",
+        "defaults": {
+          "light": "terminal.ansiBlue",
+          "dark": "terminal.ansiBlue",
+          "highContrast": "terminal.ansiBlue",
+          "highContrastLight": "terminal.ansiBlue"
+        }
+      },
+      {
+        "id": "markdownOutlineHeadingColors.h3",
+        "description": "Label color for ### headings in the Headings view.",
+        "defaults": {
+          "light": "terminal.ansiCyan",
+          "dark": "terminal.ansiCyan",
+          "highContrast": "terminal.ansiCyan",
+          "highContrastLight": "terminal.ansiCyan"
+        }
+      },
+      {
+        "id": "markdownOutlineHeadingColors.h4",
+        "description": "Label color for #### headings in the Headings view.",
+        "defaults": {
+          "light": "terminal.ansiMagenta",
+          "dark": "terminal.ansiMagenta",
+          "highContrast": "terminal.ansiMagenta",
+          "highContrastLight": "terminal.ansiMagenta"
+        }
+      },
+      {
+        "id": "markdownOutlineHeadingColors.h5",
+        "description": "Label color for ##### headings in the Headings view.",
+        "defaults": {
+          "light": "terminal.ansiYellow",
+          "dark": "terminal.ansiYellow",
+          "highContrast": "terminal.ansiYellow",
+          "highContrastLight": "terminal.ansiYellow"
+        }
+      },
+      {
+        "id": "markdownOutlineHeadingColors.h6",
+        "description": "Label color for ###### headings in the Headings view.",
+        "defaults": {
+          "light": "descriptionForeground",
+          "dark": "descriptionForeground",
+          "highContrast": "descriptionForeground",
+          "highContrastLight": "descriptionForeground"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "package": "npx --yes @vscode/vsce package --allow-missing-repository",
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}
